@@ -1,0 +1,9 @@
+.nav-item:hover {
+  cursor: pointer;
+  text-shadow: 1px 1px grey;
+}
+
+.heading {
+  color: coral;
+  font-style: italic;
+}
