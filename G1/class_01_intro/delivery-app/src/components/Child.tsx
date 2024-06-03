@@ -1,4 +1,5 @@
 const Child = ({ message, otherMessage }) => {
+	console.log('Child rerender');
 	return (
 		<div>
 			<h2>Child</h2>
