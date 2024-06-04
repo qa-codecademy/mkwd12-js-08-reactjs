@@ -1,0 +1,8 @@
+/* Css modules are isolated and they can be used only where they are imported and their classes are applied */
+
+.list {
+  padding: 20px;
+  margin: 20px;
+  background-color: lightpink;
+  border: 2px solid hotpink;
+}

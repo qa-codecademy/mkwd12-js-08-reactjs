@@ -1,0 +1,18 @@
+.main {
+  margin: 10px;
+}
+
+.hide-paragraph {
+  background-color: lightblue;
+  padding: 10px;
+}
+
+.todo {
+  padding: 10px 3px;
+  border: 1px solid navy;
+}
+
+.list {
+  background-color: lightblue;
+  border: 2px solid navy;
+}
