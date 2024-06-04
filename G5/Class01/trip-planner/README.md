@@ -1,30 +1,21 @@
-# React + TypeScript + Vite
+# Homework
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Prerequiremnts
 
-Currently, two official plugins are available:
+- Create new react + typescript app named Trip-Planner
+- Remove the initial css files (App.css and index.css) that are created when the project's boilerplate is created. NOTE: When you gonna remove them, make sure you remove the imports of those files as well.
+- Remove the contents of App.tsx so you are good to code you application
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Requirements
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- Create a functional component named: Greetings that will show just a welcoming message to the user. Call this component in App.tsx
+- Create new component Trips. In this component create an array of trips that is going to be just an array of strings. The array should contain the desired destinations.
+  For Example: const trips = ['London', 'Paris', 'Tokyo'].
+  - Iterate through the list of trips and display them on the screen.
+  - Display this component in App.tsx also
+- Create new component AboutMe. This component should accept the following props: fullName :string, from: string, favouriteMovies: string[]
+  - In this component in a paragraph display the property fullName and the property from.
+  - Create new component Movies that is going to accept 1 props which is array of movies.
+  - This new Movies component call it in the component AboutMe and pass the favouriteMovies prop as coresponding property.
+  - As expected, iterate through the list of movies in the Movies component and show them on the screen.
+  - Finally call the AboutMe component in App.tsx
