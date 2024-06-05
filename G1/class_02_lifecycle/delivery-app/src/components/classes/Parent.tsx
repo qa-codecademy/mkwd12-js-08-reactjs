@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Child } from './Child';
 
 export class Parent extends Component {
 	constructor(props) {
@@ -64,6 +65,7 @@ export class Parent extends Component {
 				<button onClick={this.toggleChild}>Toggle Child</button>
 				<button onClick={this.changeParentData}>Change Parent Data</button>
 				<button onClick={this.noRenderChange}>No Render Change</button>
+				{this.state.showChild && <Child parentData={this.state.parentData} />}
 			</div>
 		);
 	}
