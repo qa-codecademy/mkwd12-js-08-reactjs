@@ -26,6 +26,10 @@ class Parent extends Component {
     this.setState({ message: "Updated message parent" });
   };
 
+  componentWillUnmount(): void {
+    console.log("COMPONENT WILL UNMOUNT");
+  }
+
   render() {
     console.log("RENDER PARENT");
     return (

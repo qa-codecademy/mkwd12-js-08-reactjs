@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const EventsExamples = () => {
   // [name of variable, function that will change the value of the state variable]
@@ -35,6 +35,17 @@ export const EventsExamples = () => {
     setShouldShow(!shouldShow);
   };
 
+  useEffect(() => {
+    if (!shouldShow) {
+      // do this logic
+      return;
+    }
+    // another logic here
+  }, [shouldShow]);
+
+  useEffect(() => {
+    console.log("new trip added");
+  }, [trips]);
   return (
     <section>
       <h2>Events examples</h2>
