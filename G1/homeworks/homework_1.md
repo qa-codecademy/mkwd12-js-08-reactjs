@@ -18,6 +18,10 @@ Create a new React app using vite, latest version of React and Typescript.
 
 The navigation should change the page when clicked, all selected items should be displayed in the main section. No content is needed for now, just show the name of the page, e.g. "Asia page", "Europe page" etc.
 
+Example on what should be shown when Asia is clicked:
+
+![web-layout](./imgs/hm1-img2.png)
+
 Countries can be in component memory, and should follow the following structure:
 
 ```tsx
