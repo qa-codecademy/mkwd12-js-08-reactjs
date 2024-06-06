@@ -1,30 +1,23 @@
-# React + TypeScript + Vite
+# Homework 2
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Part 1: CounterBy (Increment and Decrement by a Specified Value)
 
-Currently, two official plugins are available:
+**Goal:** Create a component with one input and two buttons: "Increment" and "Decrement." The component should display a counter value on the screen. When the increment or decrement button is clicked, the counter should be updated accordingly.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Acceptance Criteria:
 
-## Expanding the ESLint configuration
+- If the input is empty (no value in the input), the counter should increment and decrement by 1.
+- If a value is provided (e.g., 10), the increment and decrement buttons should update the counter by that value.
+- If the value in the input is not a number and the user tries to increment or decrement, display a div with a red background color and the text: "The input is not a number, please change it."
+- If a negative number is provided in the input, do not allow incrementing or decrementing. (Hint: Use early return checks in the function or find out how to disable the button.)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+---
 
-- Configure the top-level `parserOptions` property like this:
+## Part 2: Timer Component
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+**Goal:** Create a component that automatically starts a timer when the user enters it. The timer should increase by 1 each second, and there should be a "Reset" button to restart the timer from 1.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Acceptance Criteria:
+
+- The timer should start from 1 and increase by 1 each second.
+- Create a button with the value "Reset." When clicked, it should reset the timer to start from 1 again, regardless of the current timer value.
