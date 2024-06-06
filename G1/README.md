@@ -19,5 +19,5 @@ This repository will contain every piece of material about the subject. It will 
 
 ## Team
 
-- Trainer: Ivo Kostovski ivo@kostovski.dev GH: ivo.kostovski@gmail.com
+- Trainer: Ivo Kostovski ivo@kostovski.dev GH: ivokostovski
 - Assistant: Ivan Apostolovski ivan.apostolovski@gmail.com GH IvanXh0
