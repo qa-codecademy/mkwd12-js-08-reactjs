@@ -1,0 +1,20 @@
+.ProductCard {
+  border: 2px solid #564418;
+  padding: 20px;
+  border-radius: 4px;
+  background: blanchedalmond;
+  width: 200px;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.heading {
+  font-size: 18px;
+}
+
+.out-of-stock {
+  background-color: lightgray;
+  border: 2px solid gray;
+}

@@ -1,0 +1,29 @@
+:root {
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+.counter {
+  padding: 20px;
+  background: skyblue;
+  border: 2px solid navy;
+  width: 250px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+.counter-display {
+  text-align: center;
+  font-size: 70px;
+}
+
+.counter-controls {
+  display: flex;
+  justify-content: space-between;
+}

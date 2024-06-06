@@ -1,0 +1,15 @@
+.ProductPage h2 {
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+  font-size: 28px;
+}
+
+.ProductPage .products-container {
+  display: flex;
+  flex-wrap: nowrap;
+  padding: 20px;
+  align-content: flex-end;
+  justify-content: space-evenly;
+  align-items: center;
+}
