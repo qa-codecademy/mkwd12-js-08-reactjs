@@ -1,4 +1,3 @@
-```markdown
 # Homework - 3
 
 ## Requirements:
@@ -36,7 +35,4 @@ Enhance the existing code by adding the functionality to create and add a new tr
 
 - For generating a unique `id` for each trip, you can use `Date.now()`.
 
----
-
 Feel free to reach out if you have any questions or need further clarifications. Happy coding!
-```
