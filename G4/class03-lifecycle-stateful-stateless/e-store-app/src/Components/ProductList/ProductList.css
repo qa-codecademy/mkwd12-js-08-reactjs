@@ -1,0 +1,17 @@
+.ProductList {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  gap: 25px;
+  align-content: flex;
+  justify-content: start;
+  align-items: center;
+  min-width: 50%;
+}
+
+.ProductList h2 {
+  text-align: center;
+  border: 2px solid rgb(99, 99, 139);
+  background-color: white;
+  padding: 40px 20px;
+}

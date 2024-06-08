@@ -1,0 +1,7 @@
+.ProductsPage {
+  padding: 20px;
+}
+
+.ProductsPage .content {
+  display: flex;
+}

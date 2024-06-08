@@ -1,0 +1,45 @@
+.ProductInfo {
+  width: 50%;
+  background-color: lightyellow;
+  text-align: center;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 100px;
+  flex-shrink: 0;
+}
+
+.info-card {
+  border: 2px solid rgb(99, 99, 139);
+  background-color: white;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  min-height: 400px;
+}
+
+.info-card h3 {
+  font-size: 24px;
+}
+
+.info-body {
+  display: flex;
+  width: 80%;
+  gap: 30px;
+  font-size: 18px;
+  align-items: center;
+}
+
+.info-body img {
+  border-radius: 4px;
+  padding: 20px;
+  width: 300px;
+}
+
+.not-selected {
+  min-height: initial;
+}
