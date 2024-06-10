@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from './components/Header';
 import MainComponent from './components/MainContainer';
 import { Category } from './common/types/category.enum';
@@ -16,13 +16,82 @@ export default function App() {
 	const [showCart, setShowCart] = useState(false);
 	const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
+	const [cartItemsCount, setCartItemsCount] = useState(0);
+
 	const handleAddToCart = (dish: Dish) => {
+		// check if dish is already in cart
+
+		if (cartItems.some(cartItem => cartItem.dish.id === dish.id)) {
+			handleQuantityChange(dish.id, 'increment');
+			return;
+		}
+
+		// Dish doesn't exist in cart
 		const cartItem = {
 			dish,
 			quantity: 1,
 		} satisfies CartItem;
 		setCartItems([...cartItems, cartItem]);
 	};
+
+	// const handleIncrementQuantity = (dishId: number) => {
+	// 	const updatedCartItems = cartItems.map(cartItem => {
+	// 		if (cartItem.dish.id === dishId) {
+	// 			return {
+	// 				...cartItem,
+	// 				quantity: cartItem.quantity + 1,
+	// 			};
+	// 		}
+
+	// 		return cartItem;
+	// 	});
+
+	// 	setCartItems(updatedCartItems);
+	// };
+
+	// const handleDecrementQuantity = (dishId: number) => {
+	// 	const updatedCartItems = cartItems
+	// 		.map(cartItem => {
+	// 			if (cartItem.dish.id === dishId) {
+	// 				return {
+	// 					...cartItem,
+	// 					quantity: cartItem.quantity - 1,
+	// 				};
+	// 			}
+
+	// 			return cartItem;
+	// 		})
+	// 		.filter(item => item.quantity);
+
+	// 	setCartItems(updatedCartItems);
+	// };
+
+	const handleQuantityChange = (
+		dishId: number,
+		typeOfChange: 'increment' | 'decrement'
+	) => {
+		const updatedCartItems = cartItems
+			.map(cartItem => {
+				if (cartItem.dish.id === dishId) {
+					return {
+						...cartItem,
+						quantity:
+							typeOfChange === 'increment'
+								? cartItem.quantity + 1
+								: cartItem.quantity - 1,
+					};
+				}
+
+				return cartItem;
+			})
+			.filter(item => item.quantity);
+
+		setCartItems(updatedCartItems);
+	};
+
+	useEffect(() => {
+		setCartItemsCount(cartItems.reduce((sum, curr) => sum + curr.quantity, 0));
+	}, [cartItems]);
 
 	const handleCartClick = () => {
 		setShowCart(!showCart);
@@ -39,6 +108,7 @@ export default function App() {
 			<Header
 				selectCategory={handleCategorySelect}
 				handleCartClick={handleCartClick}
+				cartItemsCount={cartItemsCount}
 			/>
 			{/* Home page */}
 			{!selectedCategory && !showCart && (
@@ -58,7 +128,12 @@ export default function App() {
 			)}
 
 			{/* Cart */}
-			{showCart && <Cart cartItems={cartItems} />}
+			{showCart && (
+				<Cart
+					cartItems={cartItems}
+					handleQuantityChange={handleQuantityChange}
+				/>
+			)}
 		</div>
 	);
 }

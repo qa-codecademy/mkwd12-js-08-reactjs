@@ -3,11 +3,13 @@ import { Category } from '../common/types/category.enum';
 type HeaderProps = {
 	selectCategory: (category: Category | null) => void;
 	handleCartClick: () => void;
+	cartItemsCount: number;
 };
 
 export default function Header({
 	selectCategory,
 	handleCartClick,
+	cartItemsCount,
 }: HeaderProps) {
 	const categories = Object.values(Category);
 
@@ -24,7 +26,7 @@ export default function Header({
 					))}
 				</ul>
 			</nav>
-			<div onClick={handleCartClick}>Cart: 0</div>
+			<div onClick={handleCartClick}>Cart: {cartItemsCount}</div>
 		</header>
 	);
 }
