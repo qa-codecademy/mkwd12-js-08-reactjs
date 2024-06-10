@@ -1,0 +1,16 @@
+.createTripForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 50%;
+}
+
+.createTripForm input {
+  padding: 5px;
+}
+
+.createTripForm button {
+  padding: 5px;
+  border: none;
+  cursor: pointer;
+}
