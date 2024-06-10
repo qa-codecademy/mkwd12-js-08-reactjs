@@ -2,6 +2,9 @@ import { useState } from 'react';
 import Header from './components/Header';
 import MainComponent from './components/MainContainer';
 import { Category } from './common/types/category.enum';
+import dishes from './data/dishes.json';
+import CategoryPage from './components/Category';
+import { Dish } from './common/types/dish.interface';
 
 export default function App() {
 	// null is homepage
@@ -13,9 +16,9 @@ export default function App() {
 		<div>
 			<Header selectCategory={setSelectedCategory} />
 			{selectedCategory === null ? (
-				<MainComponent />
+				<MainComponent dishes={dishes as Dish[]} />
 			) : (
-				<div>{selectedCategory} Page</div>
+				<CategoryPage category={selectedCategory} dishes={dishes as Dish[]} />
 			)}
 		</div>
 	);
