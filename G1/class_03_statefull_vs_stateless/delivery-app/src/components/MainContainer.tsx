@@ -4,9 +4,13 @@ import TopDishes from './TopDishes';
 
 type MainComponentProps = {
 	dishes: Dish[];
+	handleAddToCart: (dish: Dish) => void;
 };
 
-export default function MainComponent({ dishes }: MainComponentProps) {
+export default function MainComponent({
+	dishes,
+	handleAddToCart,
+}: MainComponentProps) {
 	const popularDishes = [...dishes]
 		.sort((a, b) => b.orders - a.orders)
 		.slice(0, 5) as Dish[];
@@ -19,8 +23,16 @@ export default function MainComponent({ dishes }: MainComponentProps) {
 
 	return (
 		<div className='p-4'>
-			<TopDishes title='Top 5 Most Popular Dishes' dishes={popularDishes} />
-			<TopDishes title='Top 5 Recently Added Dishes' dishes={recentDishes} />
+			<TopDishes
+				title='Top 5 Most Popular Dishes'
+				dishes={popularDishes}
+				handleAddToCart={handleAddToCart}
+			/>
+			<TopDishes
+				title='Top 5 Recently Added Dishes'
+				dishes={recentDishes}
+				handleAddToCart={handleAddToCart}
+			/>
 		</div>
 	);
 }

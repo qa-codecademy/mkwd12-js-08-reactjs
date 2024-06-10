@@ -2,9 +2,13 @@ import { Category } from '../common/types/category.enum';
 
 type HeaderProps = {
 	selectCategory: (category: Category | null) => void;
+	handleCartClick: () => void;
 };
 
-export default function Header({ selectCategory }: HeaderProps) {
+export default function Header({
+	selectCategory,
+	handleCartClick,
+}: HeaderProps) {
 	const categories = Object.values(Category);
 
 	return (
@@ -14,11 +18,13 @@ export default function Header({ selectCategory }: HeaderProps) {
 				<ul className='flex gap-x-4'>
 					<li onClick={() => selectCategory(null)}>Home</li>
 					{categories.map(category => (
-						<li onClick={() => selectCategory(category)}>{category}</li>
+						<li key={category} onClick={() => selectCategory(category)}>
+							{category}
+						</li>
 					))}
 				</ul>
 			</nav>
-			<div>Cart: 0</div>
+			<div onClick={handleCartClick}>Cart: 0</div>
 		</header>
 	);
 }

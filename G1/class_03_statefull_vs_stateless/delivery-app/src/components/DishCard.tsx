@@ -2,9 +2,10 @@ import { Dish } from '../common/types/dish.interface';
 
 type DishCardProps = {
 	dish: Dish;
+	handleAddToCart: (dish: Dish) => void;
 };
 
-export default function DishCard({ dish }: DishCardProps) {
+export default function DishCard({ dish, handleAddToCart }: DishCardProps) {
 	return (
 		<div key={dish.id} className='border p-4 rounded shadow'>
 			<img
@@ -16,7 +17,9 @@ export default function DishCard({ dish }: DishCardProps) {
 			<p className='text-gray-600'>{dish.description}</p>
 			<div className='flex justify-between items-center mt-2'>
 				<span className='text-green-600 font-bold'>${dish.price}</span>
-				<button className='bg-blue-500 text-white px-2 py-1 rounded'>
+				<button
+					className='bg-blue-500 text-white px-2 py-1 rounded'
+					onClick={() => handleAddToCart(dish)}>
 					Add to Cart
 				</button>
 			</div>

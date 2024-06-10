@@ -1,6 +1,6 @@
 export enum Category {
 	Pizza = 'Pizza',
-	Burger = 'Burger',
+	Burgers = 'Burgers',
 	Pasta = 'Pasta',
 	Sushi = 'Sushi',
 	Traditional = 'Traditional',
