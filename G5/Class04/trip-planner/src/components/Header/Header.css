@@ -1,0 +1,13 @@
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #f4f4f4;
+  margin-bottom: 50px;
+}
+
+.navLinks {
+  display: flex;
+  list-style-type: none;
+  gap: 10px;
+}

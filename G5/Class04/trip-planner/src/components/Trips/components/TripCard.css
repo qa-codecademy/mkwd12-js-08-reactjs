@@ -1,0 +1,21 @@
+.tripCard {
+  background-color: #f4f4f4;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 40%;
+  box-shadow: -2px 0px 5px 0px cornflowerblue;
+}
+
+.operations {
+  display: flex;
+  gap: 10px;
+}
+
+.operations button {
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  background-color: cornflowerblue;
+  cursor: pointer;
+}
