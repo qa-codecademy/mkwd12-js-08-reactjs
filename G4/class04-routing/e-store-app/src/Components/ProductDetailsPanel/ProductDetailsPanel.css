@@ -1,0 +1,61 @@
+.ProductDetailsPanel {
+  width: 70%;
+  min-height: 600px;
+  border: 2px solid darkgray;
+  border-radius: 4px;
+  background-color: white;
+  margin: 30px;
+  padding: 20px;
+  text-align: left;
+}
+
+.ProductDetailsPanel h3 {
+  font-size: 40px;
+  margin: 0;
+  font-weight: 300;
+}
+
+.panel-content {
+  display: flex;
+}
+
+.panel-content img {
+  object-fit: contain;
+  width: 90%;
+  margin-top: 70px;
+  max-height: 350px;
+}
+
+.panel-content > div {
+  width: 50%;
+  font-size: 20px;
+}
+
+.panel-controls {
+  display: flex;
+  padding: 10px;
+  justify-content: flex-end;
+  border-radius: 4px;
+}
+
+.panel-details {
+  background-color: white;
+  border-radius: 4px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: max-content;
+}
+
+.panel-controls p {
+  text-align: center;
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  background-color: lightgreen;
+  min-width: 100px;
+  padding: 10px;
+  border-radius: 4px;
+  margin-right: 20px;
+}

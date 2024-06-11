@@ -1,0 +1,19 @@
+.CartList {
+  list-style: none;
+  border-radius: 3px;
+  font-size: 20px;
+  background-color: rgb(255, 118, 118);
+  width: 70%;
+  margin: 15px;
+  padding: 0;
+  padding: 15px 20px;
+}
+
+.CartList-heading {
+  background-color: rgb(255, 118, 118);
+  width: 70%;
+  border-radius: 3px;
+  text-align: center;
+  padding: 20px;
+  font-size: 26px;
+}
