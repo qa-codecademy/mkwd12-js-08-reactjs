@@ -1,5 +1,7 @@
+import { useNavigate } from 'react-router-dom';
 import { CartItem } from '../common/types/cart-item.interface';
 import CartItemContainer from './CartItemContainer';
+import calculateTotalPrice from '../common/helpers/calculate-total-price.helper';
 
 type CartProps = {
 	cartItems: CartItem[];
@@ -10,6 +12,8 @@ type CartProps = {
 };
 
 export default function Cart({ cartItems, handleQuantityChange }: CartProps) {
+	const navigate = useNavigate();
+
 	return (
 		<div className='p-4'>
 			<h2 className='text-2xl font-bold mb-4'>My Cart</h2>
@@ -22,6 +26,15 @@ export default function Cart({ cartItems, handleQuantityChange }: CartProps) {
 					/>
 				))}
 			</div>
+			<div className='mt-2 text-right font-bold'>
+				Total: ${calculateTotalPrice(cartItems).toFixed(2)}
+			</div>
+			<button
+				className='mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg'
+				disabled={!cartItems.length}
+				onClick={() => navigate('/check-out-address')}>
+				Make Order
+			</button>
 		</div>
 	);
 }

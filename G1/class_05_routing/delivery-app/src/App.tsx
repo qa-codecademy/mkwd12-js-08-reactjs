@@ -9,11 +9,10 @@ import Cart from './components/Cart';
 import { CartItem } from './common/types/cart-item.interface';
 import { Route, Routes } from 'react-router-dom';
 import NotFound from './components/NotFound';
+import CheckOutAddress from './components/CheckOutAddress';
 
 export default function App() {
-	const [showCart, setShowCart] = useState(false);
 	const [cartItems, setCartItems] = useState<CartItem[]>([]);
-
 	const [cartItemsCount, setCartItemsCount] = useState(0);
 
 	const handleAddToCart = (dish: Dish) => {
@@ -90,6 +89,7 @@ export default function App() {
 						/>
 					}
 				/>
+				<Route path='check-out-address' element={<CheckOutAddress />} />
 				<Route path='*' element={<NotFound />} />
 			</Routes>
 		</>
