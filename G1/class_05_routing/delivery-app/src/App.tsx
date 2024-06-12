@@ -8,12 +8,9 @@ import { Dish } from './common/types/dish.interface';
 import Cart from './components/Cart';
 import { CartItem } from './common/types/cart-item.interface';
 import { Route, Routes } from 'react-router-dom';
+import NotFound from './components/NotFound';
 
 export default function App() {
-	// null is homepage
-	const [selectedCategory, setSelectedCategory] = useState<Category | null>(
-		null
-	);
 	const [showCart, setShowCart] = useState(false);
 	const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
@@ -62,23 +59,9 @@ export default function App() {
 		setCartItemsCount(cartItems.reduce((sum, curr) => sum + curr.quantity, 0));
 	}, [cartItems]);
 
-	const handleCartClick = () => {
-		setShowCart(!showCart);
-		setSelectedCategory(null);
-	};
-
-	const handleCategorySelect = (category: Category | null) => {
-		setSelectedCategory(category);
-		setShowCart(false);
-	};
-
 	return (
 		<>
-			<Header
-				selectCategory={handleCategorySelect}
-				handleCartClick={handleCartClick}
-				cartItemsCount={cartItemsCount}
-			/>
+			<Header cartItemsCount={cartItemsCount} />
 			<Routes>
 				<Route
 					path='/'
@@ -98,14 +81,16 @@ export default function App() {
 						/>
 					}
 				/>
-
-				{/* {selectedCategory && (
-					<CategoryPage
-						category={selectedCategory}
-						dishes={dishes as Dish[]}
-						handleAddToCart={handleAddToCart}
-					/>
-				)} */}
+				<Route
+					path={`/category/:categoryName`}
+					element={
+						<CategoryPage
+							dishes={dishes as Dish[]}
+							handleAddToCart={handleAddToCart}
+						/>
+					}
+				/>
+				<Route path='*' element={<NotFound />} />
 			</Routes>
 		</>
 	);

@@ -1,18 +1,19 @@
+import { useParams } from 'react-router-dom';
 import { Category } from '../common/types/category.enum';
 import { Dish } from '../common/types/dish.interface';
 import DishCard from './DishCard';
 
 type CategoryPageProps = {
-	category: Category;
 	dishes: Dish[];
 	handleAddToCart: (dish: Dish) => void;
 };
 
 export default function CategoryPage({
-	category,
 	dishes,
 	handleAddToCart,
 }: CategoryPageProps) {
+	const { categoryName: category } = useParams();
+
 	const filteredDishes: Dish[] = dishes.filter(
 		dish => dish.category === category
 	);
