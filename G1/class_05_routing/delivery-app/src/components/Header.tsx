@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Category } from '../common/types/category.enum';
 
 type HeaderProps = {
@@ -8,25 +9,35 @@ type HeaderProps = {
 
 export default function Header({
 	selectCategory,
-	handleCartClick,
 	cartItemsCount,
 }: HeaderProps) {
 	const categories = Object.values(Category);
 
 	return (
-		<header className='flex justify-between items-center p-4 bg-gray-800 text-white'>
-			<h1 className='text-xl font-bold cursor-pointer'>QA Delivery App</h1>
+		<header className='flex flex-wrap justify-between items-center p-4 bg-gray-800 text-white'>
+			<h1 className='text-xl font-bold cursor-pointer'>
+				<Link to='/'>QA Delivery App</Link>
+			</h1>
 			<nav>
-				<ul className='flex gap-x-4'>
-					<li onClick={() => selectCategory(null)}>Home</li>
+				<ul className='flex flex-wrap gap-x-4'>
+					<li className='cursor-pointer' onClick={() => selectCategory(null)}>
+						Home
+					</li>
 					{categories.map(category => (
-						<li key={category} onClick={() => selectCategory(category)}>
+						<li
+							className='cursor-pointer'
+							key={category}
+							onClick={() => selectCategory(category)}>
 							{category}
 						</li>
 					))}
 				</ul>
 			</nav>
-			<div onClick={handleCartClick}>Cart: {cartItemsCount}</div>
+			<div>
+				<Link className='cursor-pointer' to='/cart'>
+					Cart: {cartItemsCount}
+				</Link>
+			</div>
 		</header>
 	);
 }

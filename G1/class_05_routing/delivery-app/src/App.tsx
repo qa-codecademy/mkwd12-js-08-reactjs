@@ -7,6 +7,7 @@ import CategoryPage from './components/Category';
 import { Dish } from './common/types/dish.interface';
 import Cart from './components/Cart';
 import { CartItem } from './common/types/cart-item.interface';
+import { Route, Routes } from 'react-router-dom';
 
 export default function App() {
 	// null is homepage
@@ -33,38 +34,6 @@ export default function App() {
 		} satisfies CartItem;
 		setCartItems([...cartItems, cartItem]);
 	};
-
-	// const handleIncrementQuantity = (dishId: number) => {
-	// 	const updatedCartItems = cartItems.map(cartItem => {
-	// 		if (cartItem.dish.id === dishId) {
-	// 			return {
-	// 				...cartItem,
-	// 				quantity: cartItem.quantity + 1,
-	// 			};
-	// 		}
-
-	// 		return cartItem;
-	// 	});
-
-	// 	setCartItems(updatedCartItems);
-	// };
-
-	// const handleDecrementQuantity = (dishId: number) => {
-	// 	const updatedCartItems = cartItems
-	// 		.map(cartItem => {
-	// 			if (cartItem.dish.id === dishId) {
-	// 				return {
-	// 					...cartItem,
-	// 					quantity: cartItem.quantity - 1,
-	// 				};
-	// 			}
-
-	// 			return cartItem;
-	// 		})
-	// 		.filter(item => item.quantity);
-
-	// 	setCartItems(updatedCartItems);
-	// };
 
 	const handleQuantityChange = (
 		dishId: number,
@@ -104,36 +73,40 @@ export default function App() {
 	};
 
 	return (
-		<div>
+		<>
 			<Header
 				selectCategory={handleCategorySelect}
 				handleCartClick={handleCartClick}
 				cartItemsCount={cartItemsCount}
 			/>
-			{/* Home page */}
-			{!selectedCategory && !showCart && (
-				<MainComponent
-					dishes={dishes as Dish[]}
-					handleAddToCart={handleAddToCart}
+			<Routes>
+				<Route
+					path='/'
+					element={
+						<MainComponent
+							dishes={dishes as Dish[]}
+							handleAddToCart={handleAddToCart}
+						/>
+					}
 				/>
-			)}
+				<Route
+					path='/cart'
+					element={
+						<Cart
+							cartItems={cartItems}
+							handleQuantityChange={handleQuantityChange}
+						/>
+					}
+				/>
 
-			{/* Category pages */}
-			{selectedCategory && (
-				<CategoryPage
-					category={selectedCategory}
-					dishes={dishes as Dish[]}
-					handleAddToCart={handleAddToCart}
-				/>
-			)}
-
-			{/* Cart */}
-			{showCart && (
-				<Cart
-					cartItems={cartItems}
-					handleQuantityChange={handleQuantityChange}
-				/>
-			)}
-		</div>
+				{/* {selectedCategory && (
+					<CategoryPage
+						category={selectedCategory}
+						dishes={dishes as Dish[]}
+						handleAddToCart={handleAddToCart}
+					/>
+				)} */}
+			</Routes>
+		</>
 	);
 }
