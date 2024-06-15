@@ -1,0 +1,31 @@
+.createTripForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 70%;
+}
+
+.dueDateInput {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.createTripForm input {
+  padding: 10px;
+  border: 1px solid #E0E0E0;
+  outline-color: #FF6F61;
+}
+
+.createTripForm button {
+  padding: 10px;
+  background-color: #FF6F61;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.createTripForm select {
+  padding: 10px;
+  outline-color: #FF6F61;
+}
