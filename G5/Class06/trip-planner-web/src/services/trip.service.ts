@@ -34,3 +34,21 @@ export const createTrip = async (draftTrip: DraftTrip) => {
   const data = await response.json();
   return data;
 };
+
+export const deleteTrip = async (tripId: string) => {
+  const response = await fetch(`http://localhost:3000/trip/${tripId}`, {
+    method: "DELETE",
+  });
+
+  const data = await response.json();
+
+  return data;
+};
+
+export const getTripDetails = async (tripId: string) => {
+  const response = await fetch(`http://localhost:3000/trip/${tripId}`);
+
+  const data: Trip = await response.json();
+
+  return data;
+};

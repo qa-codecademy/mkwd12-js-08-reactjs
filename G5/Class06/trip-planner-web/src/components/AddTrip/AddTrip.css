@@ -29,3 +29,8 @@
   padding: 10px;
   outline-color: #FF6F61;
 }
+
+.createTripForm button:disabled {
+  background-color: #f4f4f4;
+  pointer-events: none;
+}

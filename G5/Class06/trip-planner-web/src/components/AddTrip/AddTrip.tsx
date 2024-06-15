@@ -4,7 +4,7 @@ import { Currency, DraftTrip, Status } from "../../types/trip";
 import { TripContext } from "../../context/trip.context";
 
 export const AddTrip = () => {
-  const { handleCreateTrip } = useContext(TripContext);
+  const { handleCreateTrip, isLoading } = useContext(TripContext);
 
   const [draftTrip, setDraftTrip] = useState<DraftTrip>({
     destination: "",
@@ -22,7 +22,6 @@ export const AddTrip = () => {
     key: string
   ) => {
     const value = event.target.value;
-    console.log(value);
 
     setDraftTrip({
       ...draftTrip,
@@ -107,7 +106,7 @@ export const AddTrip = () => {
         <option value="USD">American Dollar</option>
       </select>
 
-      <button>Save</button>
+      <button disabled={isLoading}>Save</button>
     </form>
   );
 };

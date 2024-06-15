@@ -1,5 +1,7 @@
+import { useContext } from "react";
 import "./TripCard.css";
-
+import { TripContext } from "../../../context/trip.context";
+import { useNavigate } from "react-router-dom";
 interface TripCardProps {
   id: string;
   notes: string;
@@ -7,6 +9,8 @@ interface TripCardProps {
 }
 
 export const TripCard = (props: TripCardProps) => {
+  const navigate = useNavigate();
+  const { handleDeleteTrip } = useContext(TripContext);
   const { id, notes, destination } = props;
 
   return (
@@ -15,8 +19,14 @@ export const TripCard = (props: TripCardProps) => {
       <p>{notes}</p>
 
       <div className="operations">
-        <button>Remove</button>
-        <button>View Details</button>
+        <button
+          onClick={() => {
+            handleDeleteTrip(id);
+          }}
+        >
+          Remove
+        </button>
+        <button onClick={() => navigate(`/trips/${id}`)}>View Details</button>
       </div>
     </div>
   );

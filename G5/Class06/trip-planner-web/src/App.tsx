@@ -6,6 +6,7 @@ import { Header } from "./components/Header/Header";
 import { Trips } from "./components/Trips/Trips";
 import { Container } from "./layouts/Container";
 import { AddTrip } from "./components/AddTrip/AddTrip";
+import { TripDetails } from "./components/TripDetails/TripDetails";
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
             <Route path="/trips" element={<Trips />} />
 
             <Route path="/add-trip" element={<AddTrip />} />
+
+            <Route path="/trips/:id" element={<TripDetails />} />
           </Routes>
         </Container>
       </BrowserRouter>
