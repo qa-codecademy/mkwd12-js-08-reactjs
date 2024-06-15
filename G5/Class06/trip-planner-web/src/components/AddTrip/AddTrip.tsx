@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./AddTrip.css";
 import { Currency, DraftTrip, Status } from "../../types/trip";
+import { TripContext } from "../../context/trip.context";
 
 export const AddTrip = () => {
+  const { handleCreateTrip } = useContext(TripContext);
+
   const [draftTrip, setDraftTrip] = useState<DraftTrip>({
     destination: "",
     notes: "",
@@ -27,8 +30,28 @@ export const AddTrip = () => {
     });
   };
 
+  const resetForm = () => {
+    setDraftTrip({
+      destination: "",
+      notes: "",
+      imageUrl: "",
+      amount: "",
+      currency: Currency.MKD,
+      startDate: "",
+      endDate: "",
+      status: Status.PLANNING,
+    });
+  };
+
   return (
-    <form className="createTripForm">
+    <form
+      className="createTripForm"
+      onSubmit={async (e) => {
+        e.preventDefault();
+        await handleCreateTrip(draftTrip);
+        resetForm();
+      }}
+    >
       <input
         type="text"
         placeholder="Destination"
