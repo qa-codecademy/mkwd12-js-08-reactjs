@@ -1,127 +1,137 @@
-import { ReactNode, createContext, useEffect, useMemo, useState } from "react";
-import { Dish } from "../common/types/dish.interface";
-import dishesJson from "../data/dishes.json";
-import { CartItem } from "../common/types/cart-item.interface";
+import { ReactNode, createContext, useEffect, useMemo, useState } from 'react';
+import { Dish } from '../common/types/dish.interface';
+import { CartItem } from '../common/types/cart-item.interface';
+import axios from 'axios';
 
 type DishContextProviderType = {
-  children: ReactNode | ReactNode[];
+	children: ReactNode | ReactNode[];
 };
 
 type DishContextType = {
-  greeting: (name: string) => void;
-  dishes: Dish[];
-  popularDishes: Dish[];
-  recentDishes: Dish[];
-  handleAddToCart: (dish: Dish) => void;
-  handleQuantityChange: (
-    dishId: number,
-    typeOfChange: "increment" | "decrement"
-  ) => void;
-  cartItems: CartItem[];
-  cartItemCount: number;
-  handleRemoveCartItems: () => void;
+	dishes: Dish[];
+	popularDishes: Dish[];
+	recentDishes: Dish[];
+	handleAddToCart: (dish: Dish) => void;
+	handleQuantityChange: (
+		dishId: number,
+		typeOfChange: 'increment' | 'decrement'
+	) => void;
+	cartItems: CartItem[];
+	cartItemCount: number;
+	handleRemoveCartItems: () => void;
+	isLoading: boolean;
 };
 
 const defaultValues: DishContextType = {
-  greeting: () => {},
-  dishes: [],
-  popularDishes: [],
-  recentDishes: [],
-  handleAddToCart: () => {},
-  handleQuantityChange: () => {},
-  cartItems: [],
-  cartItemCount: 0,
-  handleRemoveCartItems: () => {},
+	dishes: [],
+	popularDishes: [],
+	recentDishes: [],
+	handleAddToCart: () => {},
+	handleQuantityChange: () => {},
+	cartItems: [],
+	cartItemCount: 0,
+	handleRemoveCartItems: () => {},
+	isLoading: false,
 };
 
 export const DishContext = createContext<DishContextType>(defaultValues);
 
 export default function DishProvider({ children }: DishContextProviderType) {
-  const [dishes, setDishes] = useState<Dish[]>([]);
-  const [cartItems, setCartItems] = useState<CartItem[]>(
-    JSON.parse(localStorage.getItem("cartItems") as string) ?? []
-  );
-  const [cartItemCount, setCartItemCount] = useState(0);
-  const greeting = (name: string) => `hello ${name}`;
+	const [dishes, setDishes] = useState<Dish[]>([]);
+	const [cartItems, setCartItems] = useState<CartItem[]>(
+		JSON.parse(localStorage.getItem('cartItems') as string) ?? []
+	);
+	const [cartItemCount, setCartItemCount] = useState(0);
+	const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    setDishes(dishesJson as Dish[]);
-  }, []);
+	useEffect(() => {
+		setIsLoading(true);
+		axios('http://localhost:3000/api/dishes?page=1&pageSize=50')
+			.then(response => setDishes(response.data.payload))
+			.catch(error => console.error('Error while fetching dishes', { error }))
+			.finally(() => setIsLoading(false));
 
-  useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    setCartItemCount(cartItems.reduce((acc, cur) => acc + cur.quantity, 0));
-  }, [cartItems]);
+		// (async () => {
+		// 	const response = await axios(
+		// 		'http://localhost:3000/api/dishes?page=1&pageSize=50'
+		// 	);
+		// 	setDishes(response.data.payload);
+		// })();
+	}, []);
 
-  const handleQuantityChange = (
-    dishId: number,
-    typeOfChange: "increment" | "decrement"
-  ) => {
-    const updatedCartItems = cartItems
-      .map((cartItem) => {
-        if (cartItem.dish.id === dishId) {
-          return {
-            ...cartItem,
-            quantity:
-              typeOfChange === "increment"
-                ? cartItem.quantity + 1
-                : cartItem.quantity - 1,
-          };
-        }
+	useEffect(() => {
+		localStorage.setItem('cartItems', JSON.stringify(cartItems));
+		setCartItemCount(cartItems.reduce((acc, cur) => acc + cur.quantity, 0));
+	}, [cartItems]);
 
-        return cartItem;
-      })
-      .filter((item) => item.quantity);
+	const handleQuantityChange = (
+		dishId: number,
+		typeOfChange: 'increment' | 'decrement'
+	) => {
+		const updatedCartItems = cartItems
+			.map(cartItem => {
+				if (cartItem.dish.id === dishId) {
+					return {
+						...cartItem,
+						quantity:
+							typeOfChange === 'increment'
+								? cartItem.quantity + 1
+								: cartItem.quantity - 1,
+					};
+				}
 
-    setCartItems(updatedCartItems);
-  };
+				return cartItem;
+			})
+			.filter(item => item.quantity);
 
-  const handleAddToCart = (dish: Dish) => {
-    if (cartItems.some((cartItem) => cartItem.dish.id === dish.id)) {
-      handleQuantityChange(dish.id, "increment");
-      return;
-    }
+		setCartItems(updatedCartItems);
+	};
 
-    const cartItem = {
-      dish,
-      quantity: 1,
-    } satisfies CartItem;
-    setCartItems([...cartItems, cartItem]);
-  };
+	const handleAddToCart = (dish: Dish) => {
+		if (cartItems.some(cartItem => cartItem.dish.id === dish.id)) {
+			handleQuantityChange(dish.id, 'increment');
+			return;
+		}
 
-  const popularDishes = useMemo(
-    () => [...dishes].sort((a, b) => b.orders - a.orders).slice(0, 5),
-    [dishes]
-  );
+		const cartItem = {
+			dish,
+			quantity: 1,
+		} satisfies CartItem;
+		setCartItems([...cartItems, cartItem]);
+	};
 
-  const recentDishes = useMemo(
-    () =>
-      [...dishes].sort(
-        (a, b) =>
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-      ),
-    [dishes]
-  );
+	const popularDishes = useMemo(
+		() => [...dishes].sort((a, b) => b.orders - a.orders).slice(0, 5),
+		[dishes]
+	);
 
-  const handleRemoveCartItems = () =>
-    localStorage.getItem("cartItems")?.length &&
-    (localStorage.removeItem("cartItems"), setCartItems([]));
+	const recentDishes = useMemo(
+		() =>
+			[...dishes].sort(
+				(a, b) =>
+					new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+			),
+		[dishes]
+	);
 
-  return (
-    <DishContext.Provider
-      value={{
-        greeting,
-        dishes,
-        popularDishes,
-        recentDishes,
-        handleAddToCart,
-        handleQuantityChange,
-        cartItems,
-        cartItemCount,
-        handleRemoveCartItems,
-      }}
-    >
-      {children}
-    </DishContext.Provider>
-  );
+	const handleRemoveCartItems = () =>
+		localStorage.getItem('cartItems')?.length &&
+		(localStorage.removeItem('cartItems'), setCartItems([]));
+
+	return (
+		<DishContext.Provider
+			value={{
+				dishes,
+				popularDishes,
+				recentDishes,
+				handleAddToCart,
+				handleQuantityChange,
+				cartItems,
+				cartItemCount,
+				handleRemoveCartItems,
+				isLoading,
+			}}>
+			{children}
+		</DishContext.Provider>
+	);
 }
