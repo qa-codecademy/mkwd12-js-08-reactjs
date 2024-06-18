@@ -1,0 +1,20 @@
+html {
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+section {
+  border: 3px solid darkgray;
+  margin: 30px;
+  padding: 20px;
+  border-radius: 4px;
+}
+
+section > div {
+  margin: 20px;
+  padding-bottom: 20px;
+  border-bottom: 3px solid darkgray;
+}
