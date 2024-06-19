@@ -38,6 +38,8 @@ export const DishContext = createContext<DishContextType>(defaultValues);
 
 export default function DishProvider({ children }: DishContextProviderType) {
 	const [dishes, setDishes] = useState<Dish[]>([]);
+	const [recentDishes, setRecentDishes] = useState<Dish[]>([]);
+	const [popularDishes, setPopularDishes] = useState<Dish[]>([]);
 	const [cartItems, setCartItems] = useState<CartItem[]>(
 		JSON.parse(localStorage.getItem('cartItems') as string) ?? []
 	);
@@ -46,8 +48,21 @@ export default function DishProvider({ children }: DishContextProviderType) {
 
 	useEffect(() => {
 		setIsLoading(true);
-		axios('http://localhost:3000/api/dishes?page=1&pageSize=50')
-			.then(response => setDishes(response.data.payload))
+
+		Promise.all([
+			axios.get('http://localhost:3000/api/dishes?page=1&pageSize=50'),
+			axios.get(
+				'http://localhost:3000/api/dishes?sortBy=createdAt&sortDirection=DESC&page=1&pageSize=5'
+			),
+			axios.get(
+				'http://localhost:3000/api/dishes?sortBy=orders&sortDirection=DESC&page=1&pageSize=5'
+			),
+		])
+			.then(([dishesResponse, recentDishesResponse, popularDishesResponse]) => {
+				setDishes(dishesResponse.data.payload);
+				setRecentDishes(recentDishesResponse.data.payload);
+				setPopularDishes(popularDishesResponse.data.payload);
+			})
 			.catch(error => console.error('Error while fetching dishes', { error }))
 			.finally(() => setIsLoading(false));
 
@@ -99,20 +114,6 @@ export default function DishProvider({ children }: DishContextProviderType) {
 		} satisfies CartItem;
 		setCartItems([...cartItems, cartItem]);
 	};
-
-	const popularDishes = useMemo(
-		() => [...dishes].sort((a, b) => b.orders - a.orders).slice(0, 5),
-		[dishes]
-	);
-
-	const recentDishes = useMemo(
-		() =>
-			[...dishes].sort(
-				(a, b) =>
-					new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-			),
-		[dishes]
-	);
 
 	const handleRemoveCartItems = () =>
 		localStorage.getItem('cartItems')?.length &&
