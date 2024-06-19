@@ -1,7 +1,12 @@
 import { useState } from "react";
 import "./Search.css";
 
-export const Search = () => {
+interface SearchProps {
+  handleSearch: (searchValue: string) => void;
+}
+
+export const Search = (props: SearchProps) => {
+  const { handleSearch } = props;
   const [searchValue, setSearchValue] = useState("");
 
   const handleSetSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -15,7 +20,7 @@ export const Search = () => {
         placeholder="Search city..."
         onChange={handleSetSearch}
       />
-      <button>Search</button>
+      <button onClick={() => handleSearch(searchValue)}>Search</button>
     </div>
   );
 };
