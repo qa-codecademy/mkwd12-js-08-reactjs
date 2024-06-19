@@ -1,11 +1,11 @@
 import "./App.css";
 import Container from "./layouts/Container"; // Default import
-import { Forecast } from "./components/Forecast/Forecast"; // named import
+import { ForecastComponent } from "./components/Forecast/Forecast"; // named import
 
 function App() {
   return (
     <Container>
-      <Forecast />
+      <ForecastComponent />
     </Container>
   );
 }

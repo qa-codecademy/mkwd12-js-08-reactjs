@@ -5,6 +5,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: auto;
 }
 
 .navigation {
@@ -13,6 +14,7 @@
   align-items: center;
   width: 100%;
   justify-content: space-between;
+  margin-bottom: 40px;
 }
 
 .tabItems {
