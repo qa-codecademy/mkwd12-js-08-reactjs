@@ -1,20 +1,37 @@
+import { useState } from "react";
 import "./Forecast.css";
+import { Search } from "../Search/Search";
 
 export const Forecast = () => {
-  /**
-   * 1. Requrement:
-   *  Implement functionality where on click on Home you will show the text Home in the h2, same stands for Hourly
-   */
+  const [activeTab, setActiveTab] = useState("Home");
 
+  const handleChangeActiveTab = () => {
+    const value = activeTab === "Home" ? "Hourly" : "Home";
+    setActiveTab(value);
+  };
+
+  const tabValues = ["Home", "Hourly"];
+
+  /**
+   * Exercise 2
+   * - Create a function handleSearch that will accept 1 parameter searchValue and console log the parameter
+   * - Pass this function to the Search component as props
+   * - When the button Search is clicked, call this function
+   */
   return (
     <section className="forecastContainer">
       <div className="navigation">
-        <h2>Hourly</h2>
+        <h2>{activeTab}</h2>
         <div className="tabItems">
-          <p>Home</p>
-          <p>Hourly</p>
+          {tabValues.map((value) => (
+            <p key={value} onClick={handleChangeActiveTab}>
+              {value}
+            </p>
+          ))}
         </div>
       </div>
+
+      <Search />
     </section>
   );
 };
