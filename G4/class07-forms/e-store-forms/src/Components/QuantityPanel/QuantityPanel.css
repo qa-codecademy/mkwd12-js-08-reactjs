@@ -1,0 +1,38 @@
+.QuantityPanel {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 2px solid darkgray;
+  border-radius: 5px;
+  background-color: #eee;
+  box-sizing: border-box;
+  margin-left: 20px;
+}
+
+.QuantityPanel div {
+  font-size: 20px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.QuantityPanel button {
+  border: none;
+  max-height: auto;
+  border-radius: 0;
+}
+
+.QuantityPanel button:hover {
+  border: none;
+  background-color: var(--gray);
+}
+
+.QuantityPanel .display {
+  border-left: 2px solid darkgray;
+  border-right: 2px solid darkgray;
+  width: 50px;
+}
+
+.QuantityPanel .control:hover {
+  transition: 0.2s ease-in-out;
+  background-color: lightcoral;
+}

@@ -1,0 +1,27 @@
+.page {
+  min-height: 900px;
+  background-color: var(--white);
+  padding: 100px 20px;
+}
+
+.page-heading {
+  text-align: center;
+}
+
+.page-heading h2 {
+  margin: 0;
+  font-size: 35px;
+  padding-top: 40px;
+  font-weight: 400;
+}
+
+.page-heading p {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.page-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

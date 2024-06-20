@@ -1,0 +1,19 @@
+.SearchInput {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 3px;
+  font-size: 25px;
+  margin: 15px;
+  padding: 15px 20px;
+  width: 500px;
+}
+
+.SearchInput input {
+  font-size: 22px;
+  margin: 10px 0;
+  padding: 10px 5px;
+  border: none;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  border-radius: 4px;
+}
