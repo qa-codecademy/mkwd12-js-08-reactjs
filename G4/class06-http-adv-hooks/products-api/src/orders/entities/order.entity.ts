@@ -16,6 +16,9 @@ export class Order {
   fullName: string;
 
   @Column()
+  phoneNumber: string;
+
+  @Column()
   address: string;
 
   @OneToMany(() => OrderDetails, (orderDetails) => orderDetails.order)
