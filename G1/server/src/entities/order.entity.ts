@@ -1,5 +1,7 @@
 import {
   Column,
+  CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   JoinTable,
   ManyToMany,
@@ -36,4 +38,10 @@ export class Order {
 
   @Column('jsonb')
   address: AddressDto;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { CheckOutAddressFormValues } from '../common/types/check-out-address-form-values.interface';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { DishContext } from '../context/dish.context';
 import { Order } from '../common/types/order.interface';
 import axios from 'axios';
@@ -33,12 +33,12 @@ export default function CheckOutAddress() {
 				discountPercentage: item.dish.discountPercentage,
 			})),
 			address: data,
-		} satisfies Order;
+		} satisfies Partial<Order>;
 
 		try {
 			await axios.post('http://localhost:3000/api/orders', order);
 			handleRemoveCartItems();
-			navigate('/');
+			navigate('/order-completed');
 		} catch (error) {
 			console.error('Error while submitting order', { error });
 		}

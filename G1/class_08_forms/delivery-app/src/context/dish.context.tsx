@@ -1,7 +1,8 @@
-import { ReactNode, createContext, useEffect, useMemo, useState } from 'react';
+import { ReactNode, createContext, useEffect, useState } from 'react';
 import { Dish } from '../common/types/dish.interface';
 import { CartItem } from '../common/types/cart-item.interface';
 import axios from 'axios';
+import { OrderItem } from '../common/types/order.interface';
 
 type DishContextProviderType = {
 	children: ReactNode | ReactNode[];
@@ -13,13 +14,14 @@ type DishContextType = {
 	recentDishes: Dish[];
 	handleAddToCart: (dish: Dish) => void;
 	handleQuantityChange: (
-		dishId: number,
+		dishId: string,
 		typeOfChange: 'increment' | 'decrement'
 	) => void;
 	cartItems: CartItem[];
 	cartItemCount: number;
 	handleRemoveCartItems: () => void;
 	isLoading: boolean;
+	handleReorder: (orderItems: OrderItem[]) => void;
 };
 
 const defaultValues: DishContextType = {
@@ -32,6 +34,7 @@ const defaultValues: DishContextType = {
 	cartItemCount: 0,
 	handleRemoveCartItems: () => {},
 	isLoading: false,
+	handleReorder: () => {},
 };
 
 export const DishContext = createContext<DishContextType>(defaultValues);
@@ -65,13 +68,6 @@ export default function DishProvider({ children }: DishContextProviderType) {
 			})
 			.catch(error => console.error('Error while fetching dishes', { error }))
 			.finally(() => setIsLoading(false));
-
-		// (async () => {
-		// 	const response = await axios(
-		// 		'http://localhost:3000/api/dishes?page=1&pageSize=50'
-		// 	);
-		// 	setDishes(response.data.payload);
-		// })();
 	}, []);
 
 	useEffect(() => {
@@ -79,8 +75,17 @@ export default function DishProvider({ children }: DishContextProviderType) {
 		setCartItemCount(cartItems.reduce((acc, cur) => acc + cur.quantity, 0));
 	}, [cartItems]);
 
+	const handleReorder = (orderItems: OrderItem[]) => {
+		const newCartItems: CartItem[] = orderItems.map(orderItem => ({
+			dish: dishes.find(dish => dish.id === orderItem.dishId) as Dish,
+			quantity: orderItem.quantity,
+		}));
+
+		setCartItems([...cartItems, ...newCartItems]);
+	};
+
 	const handleQuantityChange = (
-		dishId: number,
+		dishId: string,
 		typeOfChange: 'increment' | 'decrement'
 	) => {
 		const updatedCartItems = cartItems
@@ -131,6 +136,7 @@ export default function DishProvider({ children }: DishContextProviderType) {
 				cartItemCount,
 				handleRemoveCartItems,
 				isLoading,
+				handleReorder,
 			}}>
 			{children}
 		</DishContext.Provider>
