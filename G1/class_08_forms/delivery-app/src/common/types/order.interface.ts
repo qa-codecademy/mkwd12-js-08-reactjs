@@ -14,4 +14,5 @@ export interface Order {
 	dishes: Dish[];
 	id: string;
 	totalPrice: number;
+	createdAt: string;
 }
