@@ -1,0 +1,23 @@
+.tripCard {
+  padding: 10px;
+  box-shadow: -2px 0px 5px 0px #1E90FF;
+  border-radius: 10px;
+  width: 33%;
+}
+
+.tripCard h2 {
+  margin-bottom: 10px;
+}
+.operations {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.operations button {
+  padding: 10px;
+  border: none;
+  color: white;
+  background-color: #1E90FF;
+  cursor: pointer;
+}
