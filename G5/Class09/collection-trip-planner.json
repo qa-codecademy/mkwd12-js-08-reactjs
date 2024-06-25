@@ -1,0 +1,325 @@
+{
+	"info": {
+		"_postman_id": "bf88686d-2ebe-4d5e-aa80-dab0332b981e",
+		"name": "Class 11",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13244137"
+	},
+	"item": [
+		{
+			"name": "GET TRIPS",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImlhdCI6MTcxOTI0NzU0MiwiZXhwIjoxNzE5MjQ3NTcyfQ.Spl-IYyme0IiGwCl1L0VkUYhTiY1wSikjVJSb1Kqg20"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/trip",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"trip"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE TRIP",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiam9obl91c2VyQG1haWwuY29tIiwiaWF0IjoxNzE2OTY3ODQ0LCJleHAiOjE3MTY5NzUwNDR9.GXzUeR-ZMVxloc-wNAw5AOHGBc1X9IzkpTsuFB6D1Qw"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/trip/daf27559-6330-4140-ab36-625a4d72a4df",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"trip",
+						"daf27559-6330-4140-ab36-625a4d72a4df"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET TRIP BY ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImVtYWlsIjoiam9obl91c2VyQG1haWwuY29tIiwiaWF0IjoxNzE0NDE2MTcwLCJleHAiOjE3MTQ0MTcwNzB9.gMN71JnQhNED5KxlXOLulvLrYnF_n1GwaMrgVJc6vaQ"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/trip/daf27559-6330-4140-ab36-625a4d72a4df",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"trip",
+						"daf27559-6330-4140-ab36-625a4d72a4df"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE TRIP",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImVtYWlsIjoidXNlcl9vbmVAbWFpbC5jb20iLCJpYXQiOjE3MTkyNDUyNzksImV4cCI6MTcxOTI0NTMwOX0.ZAaHgwO7yOiJ4MzlcFVq1CuQ9JBVuizmd1CH2qeJfYU"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"budget\": {\n        \"amount\": 6600,\n        \"currency\": \"EUR\"\n    },\n    \"destination\": \"London\",\n    \"status\": \"PLANNING\",\n    \"notes\": \"Watch Chelsea\",\n    \"startDate\": 1712998983544,\n    \"endDate\": 1713564000000,\n    \"imageUrl\": \"some url\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/trip",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"trip"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "REGISTER",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"user_one@mail.com\",\n    \"password\": \"User12345\"\n}\n\n\n// {\n//     \"email\": \"john_user@mail.com\",\n//     \"password\": \"Johnuser12345\"\n// }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/auth/register",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LOGIN",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "// {\n//     \"email\": \"john_user@mail.com\",\n//     \"password\": \"Johnuser12345\"\n// }\n\n{\n    \"email\": \"user_one@mail.com\",\n    \"password\": \"User12345\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/auth/login",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "REFRESH TOKEN",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "refresh-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImlhdCI6MTcxOTI0NzQ5OSwiZXhwIjoxNzE5ODUyMjk5fQ.9kOELHgFDaZGW7X09byBSQX-AJUASOfrG7rP4L3MBL0"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "// {\n//     \"email\": \"john_user@mail.com\",\n//     \"password\": \"Johnuser12345\"\n// }\n\n{\n    \"email\": \"user_one@mail.com\",\n    \"password\": \"User12345\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/auth/refresh-token",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"refresh-token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LOGOUT",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "refresh-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImlhdCI6MTcxOTEzMzkyNywiZXhwIjoxNzE5NzM4NzI3fQ.V8tYbOckn6YsnVw92yr7jNwq-RV-bMUqhi5zbN3UbzY"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "// {\n//     \"email\": \"john_user@mail.com\",\n//     \"password\": \"Johnuser12345\"\n// }\n\n{\n    \"email\": \"user_one@mail.com\",\n    \"password\": \"User12345\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/auth/logout",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE TRIP",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImVtYWlsIjoiam9obl91c2VyQG1haWwuY29tIiwiaWF0IjoxNzE0NDE1MjU3LCJleHAiOjE3MTQ0MTYxNTd9.YEYTcs7asvSLKO2bKqZZEfHcKBOb1cmvZLRHlBfeAUQ"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"destination\": \"ehehehe\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/trip/daf27559-6330-4140-ab36-625a4d72a4df",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"trip",
+						"daf27559-6330-4140-ab36-625a4d72a4df"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE BUDGET",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImVtYWlsIjoiam9obl91c2VyQG1haWwuY29tIiwiaWF0IjoxNzE0NDA5MzU2LCJleHAiOjE3MTQ0MTAyNTZ9.0rcU2b5SZdEgt8ThjIsKc2o6aJn2gau9Y9ZCefscI2o"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 5500\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/budget/d5245d5a-770b-48dc-9f14-7c32d04caca9",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"budget",
+						"d5245d5a-770b-48dc-9f14-7c32d04caca9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET COUNT",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoiam9obl91c2VyQG1haWwuY29tIiwiaWF0IjoxNzE3MDA3NzY2LCJleHAiOjE3MTcwMTg1NjZ9.hmjKYVoy5fUerlhO1PR6oQWK7ii5_3veNGdHPlPy8Xg"
+					}
+				],
+				"url": {
+					"raw": "localhost:3001/trip/count",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"trip",
+						"count"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
