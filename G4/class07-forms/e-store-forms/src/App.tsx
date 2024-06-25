@@ -7,8 +7,13 @@ import NotFoundPage from "./Pages/NotFoundPage/NotFoundPage";
 import ProductDetailsPage from "./Pages/ProductDetailsPage/ProductDetailsPage";
 import ProductsPage from "./Pages/ProductsPage/ProductsPage";
 import { AddProductPage } from "./Pages/AddProductPage/AddProductPage";
+import CheckoutPage from "./Pages/CheckoutPage/CheckoutPage";
+import { useContext } from "react";
+import { ProductsContext } from "./Contexts/ProductsContext";
 
 function App() {
+  const { getProductsInCart } = useContext(ProductsContext);
+
   return (
     <div>
       <Header />
@@ -17,6 +22,16 @@ function App() {
           <Route path="/" element={<Navigate to="/products" />} />
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/add-product" element={<AddProductPage />} />
+          <Route
+            path="/checkout"
+            element={
+              getProductsInCart().length ? (
+                <CheckoutPage />
+              ) : (
+                <Navigate to="/products" />
+              )
+            }
+          />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/products/:id" element={<ProductDetailsPage />} />
           <Route path="*" element={<NotFoundPage />} />

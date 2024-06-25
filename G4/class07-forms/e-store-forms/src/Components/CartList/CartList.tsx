@@ -2,8 +2,12 @@ import { useContext } from "react";
 import CartItem from "../CartItem/CartItem";
 import "./CartList.css";
 import { ProductsContext } from "../../Contexts/ProductsContext";
+import Button from "../Button/Button";
+import { useNavigate } from "react-router-dom";
 
 function CartList() {
+  const navigate = useNavigate();
+
   const { getProductsInCart } = useContext(ProductsContext);
 
   const cartProducts = getProductsInCart();
@@ -23,7 +27,12 @@ function CartList() {
             ))}
           </ol>
           <div className="total">
-            Total Amount: <strong>${total.toFixed(2)}</strong>
+            <span>
+              Total Amount: <strong>${total.toFixed(2)}</strong>
+            </span>
+            <Button onBtnClick={() => navigate("/checkout")}>
+              Go to checkout
+            </Button>
           </div>
         </div>
       ) : (

@@ -12,6 +12,8 @@ interface ProductContextInterface {
   getProductsInCart: () => Product[];
   addProductQuantity: (selectedProduct: Product) => void;
   removeProductQuantity: (selectedProduct: Product) => void;
+  fetchProducts: () => Promise<void>;
+  resetCart: () => void;
 }
 
 export const ProductsContext = createContext<ProductContextInterface>({
@@ -23,6 +25,8 @@ export const ProductsContext = createContext<ProductContextInterface>({
   },
   addProductQuantity() {},
   removeProductQuantity() {},
+  async fetchProducts() {},
+  resetCart() {},
 });
 
 function ProductsProvider({ children }: { children: ReactNode }) {
@@ -96,6 +100,12 @@ function ProductsProvider({ children }: { children: ReactNode }) {
     setIsLoading(false);
   };
 
+  const resetCart = () => {
+    setProducts(prevProducts =>
+      prevProducts.map(product => ({ ...product, inCart: false, quantity: 0 }))
+    );
+  };
+
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -112,6 +122,8 @@ function ProductsProvider({ children }: { children: ReactNode }) {
           getProductsInCart,
           addProductQuantity,
           removeProductQuantity,
+          fetchProducts,
+          resetCart,
         }}
       >
         {children}
