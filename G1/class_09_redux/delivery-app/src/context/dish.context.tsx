@@ -3,6 +3,7 @@ import { Dish } from '../common/types/dish.interface';
 import { CartItem } from '../common/types/cart-item.interface';
 import axios from 'axios';
 import { OrderItem } from '../common/types/order.interface';
+import { useNavigate } from 'react-router-dom';
 
 type DishContextProviderType = {
 	children: ReactNode | ReactNode[];
@@ -49,6 +50,8 @@ export default function DishProvider({ children }: DishContextProviderType) {
 	const [cartItemCount, setCartItemCount] = useState(0);
 	const [isLoading, setIsLoading] = useState(false);
 
+	const navigate = useNavigate();
+
 	useEffect(() => {
 		setIsLoading(true);
 
@@ -82,6 +85,7 @@ export default function DishProvider({ children }: DishContextProviderType) {
 		}));
 
 		setCartItems([...cartItems, ...newCartItems]);
+		navigate('/cart');
 	};
 
 	const handleQuantityChange = (

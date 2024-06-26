@@ -5,17 +5,12 @@ import { DishContext } from '../context/dish.context';
 import OrderStatus from './OrderStatus';
 import { OrderStatus as OrderStatusEnum } from '../common/types/order-status.enum';
 import isLessThanMs from '../common/helpers/is-less-than-ms.helper';
+import axios from 'axios';
 
-type OrderItemProps = { order: Order };
+type OrderItemProps = { order: Order; fetchOrders: () => void };
 
-export default function OrderItem({ order }: OrderItemProps) {
+export default function OrderItem({ order, fetchOrders }: OrderItemProps) {
 	const { handleReorder } = useContext(DishContext);
-
-	// STATUSES:
-	// Preparing < 2m | 120000ms
-	// In Progress < 5m | 300000ms
-	// Delivering < 10m | 600000ms
-	// Delivered >= 10m
 
 	const getOrderStatus = (createdAt: string) => {
 		if (isLessThanMs(createdAt, 120000)) {
@@ -26,6 +21,15 @@ export default function OrderItem({ order }: OrderItemProps) {
 			return <OrderStatus status={OrderStatusEnum.Delivering} />;
 		} else {
 			return <OrderStatus status={OrderStatusEnum.Delivered} />;
+		}
+	};
+
+	const deleteOrder = async (id: string) => {
+		try {
+			await axios.delete(`http://localhost:3000/api/orders/${id}`);
+			fetchOrders();
+		} catch (error) {
+			console.error(error);
 		}
 	};
 
@@ -46,7 +50,7 @@ export default function OrderItem({ order }: OrderItemProps) {
 							: 'cursor-pointer'
 					}
 					disabled={!isLessThanMs(order.createdAt, 600000)}
-					onClick={() => console.log('deleting...')}>
+					onClick={() => deleteOrder(order.id)}>
 					<TrashIcon className='size-7' />
 				</button>
 			</div>

@@ -10,13 +10,22 @@ export default function Orders() {
 	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
-		setIsLoading(true);
-		axios
-			.get('http://localhost:3000/api/orders')
-			.then(ordersResponse => setOrders(ordersResponse.data))
-			.catch(error => console.error(error))
-			.finally(() => setIsLoading(false));
+		fetchOrders();
 	}, []);
+
+	const fetchOrders = async (): Promise<void> => {
+		setIsLoading(true);
+		try {
+			const ordersResponse = await axios.get(
+				'http://localhost:3000/api/orders'
+			);
+			setOrders(ordersResponse.data);
+		} catch (error) {
+			console.error(error);
+		} finally {
+			setIsLoading(false);
+		}
+	};
 
 	if (isLoading) {
 		return <Loader />;
@@ -28,7 +37,7 @@ export default function Orders() {
 			{orders.length ? (
 				<div className='space-y-4'>
 					{orders.map(order => (
-						<OrderItem key={order.id} order={order} />
+						<OrderItem key={order.id} order={order} fetchOrders={fetchOrders} />
 					))}
 				</div>
 			) : (
