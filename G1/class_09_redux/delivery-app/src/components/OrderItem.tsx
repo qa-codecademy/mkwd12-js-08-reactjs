@@ -1,16 +1,18 @@
 import { DocumentDuplicateIcon, TrashIcon } from '@heroicons/react/24/outline';
 import { Order } from '../common/types/order.interface';
-import { useContext } from 'react';
-import { DishContext } from '../context/dish.context';
 import OrderStatus from './OrderStatus';
 import { OrderStatus as OrderStatusEnum } from '../common/types/order-status.enum';
 import isLessThanMs from '../common/helpers/is-less-than-ms.helper';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { reorder } from '../reducers/cart.reducer';
+import { useNavigate } from 'react-router-dom';
 
 type OrderItemProps = { order: Order; fetchOrders: () => void };
 
 export default function OrderItem({ order, fetchOrders }: OrderItemProps) {
-	const { handleReorder } = useContext(DishContext);
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const getOrderStatus = (createdAt: string) => {
 		if (isLessThanMs(createdAt, 120000)) {
@@ -40,7 +42,10 @@ export default function OrderItem({ order, fetchOrders }: OrderItemProps) {
 				{getOrderStatus(order.createdAt)}
 				<span>${order.totalPrice.toFixed(2)}</span>
 				<DocumentDuplicateIcon
-					onClick={() => handleReorder(order.items)}
+					onClick={() => {
+						dispatch(reorder(order));
+						navigate('/cart');
+					}}
 					className='size-7 cursor-pointer'
 				/>
 				<button

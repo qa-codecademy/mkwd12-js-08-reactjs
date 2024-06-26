@@ -7,21 +7,13 @@ type TopDishesProps = {
 	handleAddToCart: (dish: Dish) => void;
 };
 
-export default function TopDishes({
-	title,
-	dishes,
-	handleAddToCart,
-}: TopDishesProps) {
+export default function TopDishes({ title, dishes }: TopDishesProps) {
 	return (
 		<section>
 			<h2 className='text-2xl font-bold mb-4'>{title}</h2>
 			<div className='gap-4'>
 				{dishes.map(dish => (
-					<DishCard
-						key={dish.id}
-						dish={dish}
-						handleAddToCart={handleAddToCart}
-					/>
+					<DishCard key={dish.id} dish={dish} />
 				))}
 			</div>
 		</section>
