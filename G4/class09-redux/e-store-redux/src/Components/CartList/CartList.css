@@ -1,0 +1,40 @@
+.CartList {
+  border-radius: 3px;
+  font-size: 20px;
+  background-color: var(--orange);
+  width: 70%;
+  margin: 15px;
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.CartList ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.CartList-heading {
+  background-color: var(--orange);
+  width: 70%;
+  border-radius: 3px;
+  text-align: center;
+  padding: 20px;
+  font-size: 26px;
+}
+
+.CartList .total {
+  width: 50%;
+  border-radius: 4px;
+  font-size: 24px;
+  background-color: whitesmoke;
+  margin: 10px 0;
+  padding: 15px;
+  text-align: right;
+  align-self: flex-end;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}

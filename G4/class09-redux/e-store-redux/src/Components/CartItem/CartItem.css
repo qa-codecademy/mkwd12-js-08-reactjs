@@ -1,0 +1,32 @@
+.CartItem {
+  border-radius: 4px;
+  background-color: whitesmoke;
+  margin: 10px 0;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+}
+
+.CartItem span {
+  display: flex;
+  font-weight: 600;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.CartItem a {
+  text-decoration: none;
+  color: black;
+}
+
+.CartItem a:hover {
+  color: var(--darkgreen);
+}
+
+.CartItem:hover {
+  cursor: pointer;
+  transition: 0.2s ease-in;
+  background-color: var(--white);
+}

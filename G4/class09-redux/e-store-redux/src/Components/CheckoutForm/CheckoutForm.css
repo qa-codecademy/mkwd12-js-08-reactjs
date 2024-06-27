@@ -1,0 +1,12 @@
+.CheckoutForm {
+  width: 80%;
+  padding-bottom: 5px;
+}
+
+.CheckoutForm .form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0;
+  width: 100%;
+  margin-top: 30px;
+}

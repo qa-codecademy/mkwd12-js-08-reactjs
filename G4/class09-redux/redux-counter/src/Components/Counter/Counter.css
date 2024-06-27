@@ -1,0 +1,25 @@
+.Counter {
+  width: 500px;
+  height: auto;
+  padding: 20px;
+  background-color: lightgoldenrodyellow;
+  border: 5px solid navy;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 100px;
+}
+
+.Counter .display {
+  width: 200px;
+  height: 100px;
+  margin: 20px;
+  background-color: darkblue;
+  color: lightgoldenrodyellow;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  border-radius: 10px;
+}
