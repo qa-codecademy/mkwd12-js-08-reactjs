@@ -45,17 +45,16 @@ export class OrdersService {
         address: orderData.address,
         date: orderData.date,
         fullName: orderData.fullName,
+        phoneNumber: orderData.phoneNumber,
       });
 
-      const createdDetails = await tem
-        .withRepository(this.orderDetailsRepo)
-        .save(
-          orderData.products.map((productDetails) => ({
-            orderId: createdOrder.id,
-            productId: productDetails.productId,
-            quantity: productDetails.quantity,
-          })),
-        );
+      await tem.withRepository(this.orderDetailsRepo).save(
+        orderData.products.map((productDetails) => ({
+          orderId: createdOrder.id,
+          productId: productDetails.productId,
+          quantity: productDetails.quantity,
+        })),
+      );
     });
   }
 }
