@@ -1,17 +1,20 @@
-import Header from './components/Header';
-import MainComponent from './components/MainContainer';
-import CategoryPage from './components/Category';
-import Cart from './components/Cart';
+import { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import NotFound from './components/NotFound';
-import CheckOutAddress from './components/CheckOutAddress';
-import OrderCompleted from './components/OrderCompleted';
-import Orders from './components/Orders';
-import Dishes from './components/Dishes';
+import Loader from './components/Loader';
+
+const Header = lazy(() => import('./components/Header'));
+const MainComponent = lazy(() => import('./components/MainContainer'));
+const CategoryPage = lazy(() => import('./components/Category'));
+const Cart = lazy(() => import('./components/Cart'));
+const NotFound = lazy(() => import('./components/NotFound'));
+const CheckOutAddress = lazy(() => import('./components/CheckOutAddress'));
+const OrderCompleted = lazy(() => import('./components/OrderCompleted'));
+const Orders = lazy(() => import('./components/Orders'));
+const Dishes = lazy(() => import('./components/Dishes'));
 
 export default function App() {
 	return (
-		<>
+		<Suspense fallback={<Loader />}>
 			<Header />
 			<Routes>
 				<Route path='/' element={<MainComponent />} />
@@ -23,6 +26,6 @@ export default function App() {
 				<Route path='orders' element={<Orders />} />
 				<Route path='*' element={<NotFound />} />
 			</Routes>
-		</>
+		</Suspense>
 	);
 }
