@@ -1,28 +1,20 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../store/store';
 import DishCard from './DishCard';
-import { useEffect, useState } from 'react';
-import { Dish } from '../common/types/dish.interface';
-import axios from 'axios';
-import { setDishes, setIsLoading } from '../reducers/dish.reducer';
 import Loader from './Loader';
+import { useDishes } from '../hooks/use-dishes';
+
+const buttonClasses = `bg-blue-500 disabled:bg-blue-300 text-white py-2 px-4 rounded`;
 
 export default function Dishes() {
-	const dishes = useSelector((state: RootState) => state.dishes.dishes);
-	const isLoading = useSelector((state: RootState) => state.dishes.isLoading);
-	const [searchTerm, setSearchTerm] = useState('');
-	const dispatch = useDispatch();
-
-	useEffect(() => {
-		dispatch(setIsLoading(true));
-		axios
-			.get(
-				`http://localhost:3000/api/dishes?page=1&pageSize=50&name=${searchTerm}`
-			)
-			.then(dishesResponse => dispatch(setDishes(dishesResponse.data.payload)))
-			.catch(error => console.error(error))
-			.finally(() => dispatch(setIsLoading(false)));
-	}, [searchTerm]);
+	const {
+		dishes,
+		page,
+		pageSize,
+		isLoading,
+		total,
+		setPage,
+		setPageSize,
+		setSearchTerm,
+	} = useDishes();
 
 	return (
 		<div className='p-4'>
@@ -32,7 +24,10 @@ export default function Dishes() {
 					name='search'
 					id='search'
 					placeholder='Search...'
-					onChange={e => setSearchTerm(e.target.value)}
+					onChange={e => {
+						setPage(1);
+						setSearchTerm(e.target.value);
+					}}
 					className='w-80 px-3 py-2 bg-white border border-slate-500 rounded-md text-sm shadow-sm placeholder-slate-500'
 				/>
 			</div>
@@ -47,6 +42,41 @@ export default function Dishes() {
 					)}
 				</div>
 			)}
+			<div className='flex justify-center mt-4 gap-x-2 pb-60'>
+				<button
+					className={buttonClasses}
+					disabled={page === 1}
+					onClick={() => setPage(page - 1)}>
+					Previous
+				</button>
+
+				{Array.from({ length: Math.ceil(total / pageSize) }, (_, i) => (
+					<button
+						key={i + 1}
+						className={buttonClasses}
+						onClick={() => setPage(i + 1)}>
+						{i + 1}
+					</button>
+				))}
+
+				<button
+					className={buttonClasses}
+					disabled={total - pageSize * page <= 0}
+					onClick={() => setPage(page + 1)}>
+					Next
+				</button>
+				<select
+					name='pageSize'
+					id='pageSize'
+					onChange={e => setPageSize(parseInt(e.target.value))}
+					className='px-3 py-2 bg-white border border-slate-500 rounded-md text-sm shadow-md placeholder-slate-400'>
+					{[2, 3, 4, 5, 6, 7, 8, 9].map(size => (
+						<option key={size} value={size} selected={size === pageSize}>
+							{size}
+						</option>
+					))}
+				</select>
+			</div>
 		</div>
 	);
 }
