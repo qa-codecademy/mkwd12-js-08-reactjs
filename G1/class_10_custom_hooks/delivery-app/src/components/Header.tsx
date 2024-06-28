@@ -1,6 +1,10 @@
 import { Link, NavLink } from 'react-router-dom';
 import { Category } from '../common/types/category.enum';
-import { ShoppingBagIcon, ShoppingCartIcon } from '@heroicons/react/24/outline';
+import {
+	MagnifyingGlassIcon,
+	ShoppingBagIcon,
+	ShoppingCartIcon,
+} from '@heroicons/react/24/outline';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
 
@@ -40,6 +44,9 @@ export default function Header() {
 				</ul>
 			</nav>
 			<div className='flex flex-nowrap'>
+				<Link to='/dishes'>
+					<MagnifyingGlassIcon className='size-7 mr-2' />
+				</Link>
 				<Link to='/orders'>
 					<ShoppingBagIcon className='size-7 mr-2' />
 				</Link>
