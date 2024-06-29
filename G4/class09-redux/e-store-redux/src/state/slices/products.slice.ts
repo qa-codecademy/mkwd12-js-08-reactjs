@@ -86,6 +86,22 @@ const productsSlice = createSlice({
         product.inCart = false;
       }
     },
+    setupLocalStorageCart(
+      state,
+      { payload: cartProducts }: PayloadAction<Product[]>
+    ) {
+      console.log(cartProducts);
+
+      cartProducts.forEach(cartProduct => {
+        for (const product of state.value) {
+          if (cartProduct.id === product.id) {
+            product.inCart = cartProduct.inCart;
+            product.quantity = cartProduct.quantity;
+            break;
+          }
+        }
+      });
+    },
   },
   extraReducers: (builder: ActionReducerMapBuilder<ProductsState>) => {
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
@@ -110,6 +126,7 @@ export const {
   addProductQuantity,
   removeProductQuantity,
   resetCart,
+  setupLocalStorageCart,
 } = productsSlice.actions;
 
 export default productsSlice;

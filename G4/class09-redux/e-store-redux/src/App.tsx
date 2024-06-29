@@ -13,7 +13,11 @@ import { useAppDispatch, useAppSelector } from "./utils/hooks";
 import { selectProductsInCart } from "./state/selectors";
 import { Spinner } from "./Components/Spinner/Spinner";
 import { useEffect } from "react";
-import { fetchProducts } from "./state/slices/products.slice";
+import {
+  fetchProducts,
+  setupLocalStorageCart,
+} from "./state/slices/products.slice";
+import { loadCartFromLocalStorage } from "./services/data.service";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -22,9 +26,20 @@ function App() {
 
   const isProductsLoading = useAppSelector(state => state.products.isLoading);
 
+  const products = useAppSelector(state => state.products.value);
+
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (products.length < 1) return;
+
+    console.log("from products changed use effect");
+    const cartProducts = loadCartFromLocalStorage();
+
+    dispatch(setupLocalStorageCart(cartProducts));
+  }, [products, dispatch]);
 
   return (
     <>
